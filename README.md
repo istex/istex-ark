@@ -27,6 +27,7 @@ returns
 
 ```
 GET https://ark.istex.fr/128CB89965DA8E531EC59C61102B0678DDEE6BB7
+```
 
 returns
 
