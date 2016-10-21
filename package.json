@@ -1,0 +1,23 @@
+{
+  "name": "istex-ark",
+  "version": "1.0.0",
+  "description": "ARK identifiers for ISTEX documents (POC)",
+  "private": true,
+  "scripts": {
+    "debug": "nodemon -V index.js",
+    "lint": "eslint --ext .js lib/",
+    "insertversion": "sed -i \"s#\\(image: istex/istex-ark:\\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" docker-compose.yml",
+    "preversion": "npm run lint",
+    "version": "npm run insertversion && git add docker-compose.yml",
+    "postversion": "git push && git push --tags"
+  },
+  "dependencies": {
+    "debug": "^2.2.0",
+    "express": "^4.14.0",
+    "kuler": "0.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.6.1",
+    "nodemon": "^1.11.0"
+  }
+}

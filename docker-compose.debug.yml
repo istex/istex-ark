@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+
+  istex-ark:
+    container_name: istex-ark
+    image: node:6.9.1
+    working_dir: /app
+    volumes:
+      - .:/app
+    tty: true
+    stdin_open: true  # to be able to use CTRL+C to stop the debug
+    environment:
+      NODE_ENV: "development"
+      DEBUG: ${DEBUG}
+    ports:
+      - 45446:3000
+      - 3000:3000
+    command: npm run debug
