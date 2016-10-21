@@ -43,3 +43,19 @@ returns
   "istexId": "128CB89965DA8E531EC59C61102B0678DDEE6BB7"
 }
 ```
+
+
+## Development
+
+```
+make install
+make run-debug
+```
+
+Web server ready for debugging is available at: http://127.0.0.1:3000
+
+You can test it on these urls:
+- http://127.0.0.1:3000/128CB89965DA8E531EC59C61102B0678DDEE6BB7
+- http://127.0.0.1:3000/0134F1716893F9118DCE7278BE3333CC40D50461
+- http://127.0.0.1:3000/ark:/67375/ABC-123456
+- http://127.0.0.1:3000/ark:/67375/XYZ-234567
