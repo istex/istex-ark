@@ -14,4 +14,4 @@ RUN npm config set strict-ssl false && \
 # copy source code
 COPY . /app
 
-RUN npm start
+CMD npm start

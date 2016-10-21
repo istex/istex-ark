@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "ARK identifiers for ISTEX documents (POC)",
   "private": true,
+  "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "debug": "nodemon -V index.js",
     "lint": "eslint --ext .js lib/",
     "insertversion": "sed -i \"s#\\(image: istex/istex-ark:\\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" docker-compose.yml",
