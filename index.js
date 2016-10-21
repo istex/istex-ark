@@ -18,3 +18,13 @@ app.listen(3000, function () {
   console.info(kuler(pkg.name + ' ' + pkg.version + ' is listening', 'olive'));
   console.info(kuler('http://127.0.0.1:3000', 'green'));
 });
+
+/**
+ * To handled CTRL+C events
+ */
+function shutdown() {
+  console.log('\nGot a stop signal, shutting down...');
+  process.exit(1);
+}
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);
