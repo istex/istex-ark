@@ -16,4 +16,13 @@ services:
     ports:
       - 45446:3000
       - 3000:3000
+    depends_on:
+      - istex-ark-db
     command: npm run debug
+
+  istex-ark-db:
+    container_name: istex-ark-db
+    image: mongo:3.3.15
+    command: --smallfiles
+    volumes:
+      - ./data:/data/db
