@@ -12,11 +12,11 @@ module.exports = function (req, res, next) {
   var istexId = req.originalUrl.slice(1);
 
   debug('Requesting ARK mapped to this istexId: ' + istexId);
-  var ark = arkSplitter(mapping[istexId]);
-  if (ark) {
-    debug('ARK found: ' + istexId + ' -> ' + ark.value);
+  var arkSplitted = arkSplitter(mapping[istexId]);
+  if (arkSplitted) {
+    debug('ARK found: ' + istexId + ' -> ' + arkSplitted.ark);
     return res.status(200).send({
-      "ark": ark,
+      "ark": arkSplitted,
       "istexId": istexId
     });
   } else {
