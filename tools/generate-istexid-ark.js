@@ -18,7 +18,7 @@ var debug    = require('debug')('generate-istexid-ark');
 var istexIdArkMapping   = require('../dump/istexid-ark.json');
 var rawIstexId          = require('../dump/istexid.json');
 var subpublisherMapping = require('../dump/istexcorpus-arksubpublisher.json');
-var ark = new InistArk();
+var ark = new InistArk({ naan: '12345' });
 async.each(Object.keys(rawIstexId), function (istexId, cb) {
   
   // check it there an existing ARK for this istexID
