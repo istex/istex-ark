@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8" />
+    <title>ISTEX ARK</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <link href="/favicon.ico" rel="icon" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+      body {
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+      .container {
+        max-width: 830px;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header clearfix">
+
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="/">Home</a></li>
+            <li role="presentation"><a href="https://github.com/istex/istex-ark">Code source</a></li>
+          </ul>
+        </nav>
+
+
+        <h3 class="text-muted">ISTEX ARK</h3>
+      </div>
+
+      <div class="jumbotron">
+        <h1>Des ARK pour ISTEX</h1>
+        <p class="lead">
+Ce site a comme objectif de montrer qu'il est possible d'associer des identifiants ARK aux documents de la plateforme ISTEX afin de les rendre citables et de respecter un standard reconnu d'identification pérenne.
+<br/><br/>
+Chaque document de la plateforme ISTEX est identifié par un identifiant opaque interne qui suit un standard fait maison de 40 caractères hexadécimaux ex: <code>FCCC55E01933C40E29382CCE73153B22C32B801A</code>. Un identifiant ARK unique est alors associé à chaque identifiant ISTEX ex: <code>ark:/12345/X02-9RCN4MHD-V</code>.
+Pour le moment le mapping est réalisé sur les 70 documents que l'on peut voir ci-desosus.
+<br/><br/>
+A terme les identifiants ARK pourront être chargés directement dans la plateforme ISTEX et donc directement consultables via son <a href="https://api.istex.fr">API</a>. Ce site n'aura alors plus d'interêt et sera supprimé.
+        </p>
+      </div>
+
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th>istexid</th>
+            <th>ark</th>
+          </tr>
+        </thead>
+        <tbody id="istexid-ark-table">
+          <tr>
+            <td><a href=""><code>FCCC55E01933C40E29382CCE73153B22C32B801A</code></a></td>
+            <td><code>ark:/12345/X02-9RCN4MHD-V</code></td>
+          </tr>
+          <tr>
+            <td>Jacob</td>
+            <td>Thornton</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+         Placed at the end of the document so the pages load faster -->
+    <script src="/libs/jquery/dist/jquery.min.js"></script>
+    <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script>
+    //$('#istexid-ark-table').get('/dump/')
+    $('#istexid-ark-table').append('<tr><td>Jacob</td><td>Thornton</td></tr>');
+    </script>
+
+  </body>
+
+</html>

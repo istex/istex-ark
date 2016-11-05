@@ -8,10 +8,12 @@ var kuler = require('kuler');
 var express = require('express');
 var app    = express();
 
-// ark:/67375/ABC-123456
+app.use(express.static('public'));
+
+// ex: http://ark.istex.fr/ark:/12345/X04-T6BH06R1-H
 app.use('/ark:/*', require('./routes/ark.js'));
 
-// 128CB89965DA8E531EC59C61102B0678DDEE6BB7
+// ex: http://ark.istex.fr/2A63B61B9B81319427DCABF1C7FC660ADD980D67
 app.use('/[A-Z0-9]{40}', require('./routes/istexid.js'));
 
 app.listen(3000, function () {
