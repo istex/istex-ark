@@ -38,7 +38,13 @@ async.each(Object.keys(rawIstexId), function (istexId, cb) {
     debug('ISTEX API response for: ' + istexId);
     if (err) return cb(err);
     var doc = res.body;
-    var newArk = ark.generate({ subpublisher: subpublisherMapping[doc.corpusName] });
+
+    // search a new uniq ARK 
+    var newArk;
+    do {
+       newArk = ark.generate({ subpublisher: subpublisherMapping[doc.corpusName] });
+    } while (istexIdArkMapping[newArk])
+
     debug('  -> Corpus is: ' + doc.corpusName);
     debug('  -> Subpublisher is: ' + subpublisherMapping[doc.corpusName]);
     debug('  -> ARK is: ' + newArk);
