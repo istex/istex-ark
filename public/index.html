@@ -61,14 +61,6 @@ A terme les identifiants ARK pourront être chargés directement dans la platefo
           </tr>
         </thead>
         <tbody id="istexid-ark-table">
-          <tr>
-            <td><a href=""><code>FCCC55E01933C40E29382CCE73153B22C32B801A</code></a></td>
-            <td><code>ark:/12345/X02-9RCN4MHD-V</code></td>
-          </tr>
-          <tr>
-            <td>Jacob</td>
-            <td>Thornton</td>
-          </tr>
         </tbody>
       </table>
 
@@ -82,8 +74,21 @@ A terme les identifiants ARK pourront être chargés directement dans la platefo
     <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <script>
-    //$('#istexid-ark-table').get('/dump/')
-    $('#istexid-ark-table').append('<tr><td>Jacob</td><td>Thornton</td></tr>');
+      $.ajax({
+        url: "/index.json",
+      }).done(function (data) {
+        Object.keys(data).forEach(function (key) {
+          if (key.indexOf('ark') !== -1) return;
+          $('#istexid-ark-table').append(
+            '<tr>' +
+              '<td><a href="/' + key + '"><code>' + key + '</code></a></td>' +
+              '<td><a href="/' + data[key]+ '"><code>' + data[key]+ '</code></a></td>' +
+            '</tr>'
+          );          
+        });
+      });
+
+
     </script>
 
   </body>

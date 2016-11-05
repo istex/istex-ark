@@ -8,6 +8,7 @@ var kuler = require('kuler');
 var express = require('express');
 var app    = express();
 
+// for the homepage
 app.use(express.static('public'));
 
 // ex: http://ark.istex.fr/ark:/12345/X04-T6BH06R1-H
