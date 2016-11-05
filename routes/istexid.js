@@ -6,7 +6,7 @@ var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('istex-ark:' + basename)
   , arkSplitter = require('../lib/ark-splitter.js')
-  , mapping = require('../mapping-dump.json');
+  , mapping = require('../dump/istexid-ark.json');
 
 module.exports = function (req, res, next) {
   var istexId = req.originalUrl.slice(1);
