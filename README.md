@@ -59,3 +59,16 @@ You can test it on these urls:
 - http://127.0.0.1:3000/0134F1716893F9118DCE7278BE3333CC40D50461
 - http://127.0.0.1:3000/ark:/67375/ABC-123456
 - http://127.0.0.1:3000/ark:/67375/XYZ-234567
+
+# Managing data
+
+To update the ``dump/istexid-ark.json`` dump:
+
+```
+node tools/generate-istexid-ark.js > dump/istexid-ark-tmp.json
+mv dump/istexid-ark-tmp.json dump/istexid-ark.json
+```
+
+To add a new istex document into inist-ark:
+  - Add the istexId of the wanted document in dump/istexid.json
+  - Update ``dump/istexid-ark.json`` (see above)
