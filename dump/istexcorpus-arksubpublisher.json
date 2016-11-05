@@ -1,0 +1,17 @@
+{
+  "elsevier": "X01",
+  "wiley": "X02",
+  "springer": "X03",
+  "oup": "X04",
+  "bmj": "X05",
+  "iop": "X06",
+  "nature": "X07",
+  "rsc-journals": "X08",
+  "degruyter-journals": "X09",
+  "ecco": "X10",
+  "emerald": "X11",
+  "brill-journals": "X12",
+  "eebo": "X13",
+  "rsc-ebooks": "X14",
+  "brill-hacco": "X15"
+}
