@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "async": "^2.1.2",
+    "cors": "^2.8.1",
     "debug": "^2.2.0",
     "express": "^4.14.0",
     "inist-ark": "^2.0.0",

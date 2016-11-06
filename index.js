@@ -6,7 +6,11 @@ var pkg   = require('./package.json');
 var kuler = require('kuler');
 
 var express = require('express');
-var app    = express();
+var cors    = require('cors');
+var app     = express();
+
+// enable CORS for AJAX request from istex-view
+app.use(cors());
 
 // for the homepage
 app.use(express.static('public'));
