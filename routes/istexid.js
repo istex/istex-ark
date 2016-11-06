@@ -5,14 +5,16 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('istex-ark:' + basename)
-  , arkSplitter = require('../lib/ark-splitter.js')
-  , mapping = require('../dump/istexid-ark.json');
+  , mapping = require('../dump/istexid-ark.json')
+  , InistArk = require('inist-ark');
+
+var ark = new InistArk({ naan: '12345' });
 
 module.exports = function (req, res, next) {
   var istexId = req.originalUrl.slice(1);
 
   debug('Requesting ARK mapped to this istexId: ' + istexId);
-  var arkSplitted = arkSplitter(mapping[istexId]);
+  var arkSplitted = ark.parse(mapping[istexId]);
   if (arkSplitted) {
     debug('ARK found: ' + istexId + ' -> ' + arkSplitted.ark);
     return res.status(200).send({
