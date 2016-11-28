@@ -4,6 +4,6 @@ services:
 
   istex-ark:
     container_name: istex-ark
-    image: istex/istex-ark:1.1.1
+    image: istex/istex-ark:1.2.0
     ports:
       - 45446:3000
