@@ -1,5 +1,8 @@
 # istex-ark
 
+[![Docker stars](https://img.shields.io/docker/stars/istex/istex-ark.svg)](https://registry.hub.docker.com/u/istex/istex-ark/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/istex/istex-ark.svg)](https://registry.hub.docker.com/u/istex/istex-ark/)
+
 Mapping ARK identifiers to ISTEX internal identifiers (istexid).
 
 This webservice is temporary cause ARK identifiers will be integrated nativly in the ISTEX API in the future. It is usefull to make a proof of concept about how to associate ARK identifiers to ISTEX identifiers. 
