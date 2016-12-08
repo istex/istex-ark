@@ -3,7 +3,7 @@ var lmdb = require('node-lmdb');
 var env = new lmdb.Env();
 env.open({
     path: __dirname + "/mydata",
-    mapSize: 2*1024*1024*1024, // maximum database size
+    mapSize: 8*1024*1024*1024, // maximum database size
     maxDbs: 3
 });
 
@@ -21,6 +21,7 @@ var es = require('event-stream');
 
 var nbLineToWrite = 0;
 var txn;
+var totalWrite = 0;
 
 var stream = fs.createReadStream('sample.jsonstream')
 stream
@@ -32,7 +33,8 @@ stream
     // (do not commit lines one bye one cause it takes a lot of time)
     if (nbLineToWrite == 10000) {
       txn.commit();
-      console.log('commit 10000');
+      //console.log('commit 10000');
+      //console.log(totalWrite);
       nbLineToWrite = 0;
     }
     if (nbLineToWrite == 0) {
@@ -41,10 +43,12 @@ stream
 
     txn.putString(dbi, data.doi[0], data.istexId);
     nbLineToWrite++;
+    totalWrite++;
   }));
 
 stream.on('end', function () {
-  txt.commit();
+  txn.commit();
   dbi.close();
   env.close();
+  console.log("total nb of written entries: " + totalWrite);
 });
