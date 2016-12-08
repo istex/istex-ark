@@ -18,28 +18,33 @@ var fs = require('fs');
 var JSONStream = require('JSONStream');
 var es = require('event-stream'); 
 
+
+var nbLineToWrite = 0;
+var txn;
+
 var stream = fs.createReadStream('sample.jsonstream')
 stream
   .pipe(JSONStream.parse())
   .pipe(es.mapSync(function (data) {
-    console.log('HANDLE ' + JSON.stringify(data));
     if (data.doi.length == 0) return;
-
-    var txn = env.beginTxn();
-    //var value = txn.getString(dbi, '1');
-    //console.log(value);
-    // if (value === null) {
-    //     txn.putString(dbi, '1', "Hello world!");
-    // }
-    // else {
-    //     txn.del(dbi, '1');
-    // }
+    
+    // commit each 1M lines
+    // (do not commit lines one bye one cause it takes a lot of time)
+    if (nbLineToWrite == 10000) {
+      txn.commit();
+      console.log('commit 10000');
+      nbLineToWrite = 0;
+    }
+    if (nbLineToWrite == 0) {
+      txn = env.beginTxn();
+    }
 
     txn.putString(dbi, data.doi[0], data.istexId);
-    txn.commit();
+    nbLineToWrite++;
   }));
 
 stream.on('end', function () {
+  txt.commit();
   dbi.close();
   env.close();
 });
