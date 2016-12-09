@@ -11,6 +11,7 @@
   "dependencies": {
     "JSONStream": "^1.2.1",
     "event-stream": "^3.3.4",
+    "memwatch-next": "^0.3.0",
     "node-lmdb": "^0.4.3"
   }
 }

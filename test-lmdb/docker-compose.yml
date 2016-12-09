@@ -21,7 +21,7 @@ services:
       - .:/app
     working_dir: /app
     command: [ "node", "reader.js" ]
-    tty: true         # to have nice debug(...) outputs
+    #tty: true         # to have nice debug(...) outputs
     stdin_open: true  # to be able to use CTRL+C to stop the debug
 
   lmdb-writer:
@@ -32,5 +32,5 @@ services:
       - .:/app
     working_dir: /app
     command: [ "node", "writer.js" ]
-    tty: true         # to have nice debug(...) outputs
+    #tty: true         # to have nice debug(...) outputs
     stdin_open: true  # to be able to use CTRL+C to stop the debug
