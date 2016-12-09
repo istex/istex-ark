@@ -1,13 +1,13 @@
 console.log('HELLO writer.js');
 
-var memwatch = require('memwatch-next');
-memwatch.on('leak', function (info) {
-  console.log('MEMORY LEAK', info);
-});
+// var memwatch = require('memwatch-next');
+// memwatch.on('leak', function (info) {
+//   console.log('MEMORY LEAK', info);
+// });
 
-memwatch.on('stats', function (stats) {
-  console.log('MEMORY STATS: ', JSON.stringify(stats));
-});
+// memwatch.on('stats', function (stats) {
+//   console.log('MEMORY STATS: ', JSON.stringify(stats));
+// });
 
 var lmdb = require('node-lmdb');
 
@@ -43,8 +43,8 @@ stream
     // (do not commit lines one bye one cause it takes a lot of time)
     if (nbLineToWrite == 10000) {
       txn.commit();
-      memwatch.gc();
       console.log('commit +10000 (total=' + totalWrite + ')');
+      console.log('MEMORY', JSON.stringify(process.memoryUsage()));
       nbLineToWrite = 0;
     }
     if (nbLineToWrite == 0) {
