@@ -24,3 +24,6 @@ services:
   istex-ark-redis:
     container_name: istex-ark-redis
     image: redis:3.2.8
+    volumes:
+      - ./redis-data:/data
+    command: redis-server --appendonly yes # cf http://download.redis.io/redis-stable/redis.conf
