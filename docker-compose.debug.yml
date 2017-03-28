@@ -2,8 +2,8 @@ version: '2'
 
 services:
 
-  istex-ark:
-    container_name: istex-ark
+  istex-ark-ws:
+    container_name: istex-ark-ws
     image: node:6.9.1
     working_dir: /app
     volumes:
@@ -16,4 +16,11 @@ services:
     ports:
       - 45446:3000
       - 3000:3000
+    links:
+      - istex-ark-redis
     command: npm run debug
+
+
+  istex-ark-redis:
+    container_name: istex-ark-redis
+    image: redis:3.2.8

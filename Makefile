@@ -30,7 +30,7 @@ run-prod: ## run istex-ark in production mode
 run-debug: ## run istex-ark in debug mode (live regenerate the bundle.js if js are modified on fs)
 	@docker-compose -f ./docker-compose.debug.yml up -d
 	@# attach to the istex-ark container in order to be able to stop it easily with CTRL+C
-	@docker attach istex-ark
+	@docker attach istex-ark-ws
 
 # makefile rule used to keep current user's unix rights on the docker mounted files
 chown:
