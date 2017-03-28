@@ -14,7 +14,7 @@
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
-    "async": "^2.1.2",
+    "async": "^2.2.0",
     "body-parser": "^1.17.1",
     "cors": "^2.8.1",
     "debug": "^2.2.0",
