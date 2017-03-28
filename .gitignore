@@ -1,3 +1,4 @@
+.idea
 .DS_Store
 node_modules
 tmp/
@@ -22,3 +23,4 @@ npm-debug.log
 *.swn
 
 yarn.lock
+Supprimerait .idea/
