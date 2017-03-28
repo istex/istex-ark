@@ -7,7 +7,11 @@ var kuler = require('kuler');
 
 var express = require('express');
 var cors    = require('cors');
+var bodyParser = require('body-parser');
 var app     = express();
+
+// for parsing application/json
+app.use(bodyParser.json());
 
 // enable CORS for AJAX request from istex-view
 app.use(cors());
@@ -16,10 +20,14 @@ app.use(cors());
 app.use(express.static('public'));
 
 // ex: http://ark.istex.fr/ark:/12345/X04-T6BH06R1-H
-app.use('/ark:/*', require('./routes/ark.js'));
+app.use('/ark:/*', require('./routes/get-ark.js'));
 
 // ex: http://ark.istex.fr/2A63B61B9B81319427DCABF1C7FC660ADD980D67
-app.use('/[A-Z0-9]{40}', require('./routes/istexid.js'));
+app.use('/[A-Z0-9]{40}', require('./routes/get-istexid.js'));
+
+// post routes management
+require('./routes/post-istexids.js').routing(app);
+
 
 app.listen(3000, function () {
   console.info(kuler(pkg.name + ' ' + pkg.version + ' is listening', 'olive'));
