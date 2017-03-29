@@ -7,7 +7,7 @@ var path = require('path')
   , debug = require('debug')('istex-ark:' + basename)
   , InistArk = require('inist-ark');
 
-var ark = new InistArk({ naan: '12345' });
+var ark = new InistArk({ naan: '67375' });
 
 module.exports = function (req, res, next) {
   var istexId = req.originalUrl.slice(1);
