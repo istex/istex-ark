@@ -35,6 +35,7 @@ require('./routes/get-arks-istexids.js').routing(app);
 app.listen(3000, function () {
   console.info(kuler(pkg.name + ' ' + pkg.version + ' is listening', 'olive'));
   console.info(kuler('http://127.0.0.1:3000', 'green'));
+  console.info(kuler('http://127.0.0.1:45446 (production port)', 'green'));
 });
 
 /**

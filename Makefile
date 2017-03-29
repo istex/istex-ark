@@ -25,7 +25,7 @@ build: ## build the docker istex/istex-ark image locally
 
 run-prod: ## run istex-ark in production mode
 	@docker-compose -f ./docker-compose.yml up -d
-	@docker attach istex-ark-ws
+	@echo "Listening on http://127.0.0.1:45446/"
 
 run-debug: ## run istex-ark in debug mode (live regenerate the bundle.js if js are modified on fs)
 	@docker-compose -f ./docker-compose.debug.yml up -d
