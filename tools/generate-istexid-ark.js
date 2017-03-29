@@ -1,13 +1,13 @@
 //
-// Script used to generate dump/istexid-ark.json 
+// Script used to generate dump/istexid-ark.json
 // it is the mapping between istexId and ARK.
-// 
+//
 // dump/istexcorpus-arksubpublisher.json is used to
 // associate ISTEX corpusName to ARK subpublisher.
-// 
+//
 // To update the dump/istexid-ark.json dump:
 //   node tools/generate-istexid-ark.js > dump/istexid-ark-tmp.json
-//   mv dump/istexid-ark-tmp.json dump/istexid-ark.json 
+//   mv dump/istexid-ark-tmp.json dump/istexid-ark.json
 //
 var async    = require('async');
 var request  = require('request');
@@ -18,14 +18,16 @@ var debug    = require('debug')('generate-istexid-ark');
 var istexIdArkMapping   = require('../dump/istexid-ark.json');
 var rawIstexId          = require('../dump/istexid.json');
 var subpublisherMapping = require('../dump/istexcorpus-arksubpublisher.json');
-var ark = new InistArk({ naan: '12345' });
+var ark = new InistArk(
+  { naan: process.env.NODE_ENV === 'production' ? '67375' : '12345' }
+);
 async.each(Object.keys(rawIstexId), function (istexId, cb) {
-  
+
   // check it there an existing ARK for this istexID
   if (istexIdArkMapping[istexId]) {
     var arkValidated = ark.validate(istexIdArkMapping[istexId]);
     if (arkValidated.ark === true) {
-      debug('Skiping ' + istexId + ' because a valid ARK already exists: ' + istexIdArkMapping[istexId]);    
+      debug('Skiping ' + istexId + ' because a valid ARK already exists: ' + istexIdArkMapping[istexId]);
       return cb();
     }
   }
@@ -39,7 +41,7 @@ async.each(Object.keys(rawIstexId), function (istexId, cb) {
     if (err) return cb(err);
     var doc = res.body;
 
-    // search a new uniq ARK 
+    // search a new uniq ARK
     var newArk;
     do {
        newArk = ark.generate({ subpublisher: subpublisherMapping[doc.corpusName] });

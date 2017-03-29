@@ -27,8 +27,9 @@ module.exports.routing = function (app) {
     if (!req.body || Object.keys(req.body).length <= 0) {
       res.status(400).send('Sorry, you must give an array of {corpusName:..., idIstex:...} in the body of your POST request !')
     } else {
-      const ark = new InistArk();
-
+      const ark = new InistArk(
+        { naan: process.env.NODE_ENV === 'production' ? '67375' : '12345' }
+      );
       const arks = {}
       const docObjects = req.body;
 

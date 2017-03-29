@@ -8,7 +8,9 @@ var path = require('path')
   , redisClient = require('redis').createClient({'host': 'istex-ark-redis'})
   , InistArk = require('inist-ark');
 
-var ark = new InistArk({ naan: '67375' });
+var ark = new InistArk(
+  { naan: process.env.NODE_ENV === 'production' ? '67375' : '12345' }
+);
 
 module.exports = function (req, res, next) {
   var arkSplitted  = ark.parse(req.originalUrl.slice(1));
@@ -21,7 +23,7 @@ module.exports = function (req, res, next) {
   }
 
   debug('Requesting istexId mapped to this ARK: ' + arkSplitted);
-  
+
   redisClient.get(arkSplitted.ark, function (err, istexId) {
     if (istexId) {
       debug('istexId found: ' + arkSplitted.ark + ' -> ' + istexId);

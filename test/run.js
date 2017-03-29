@@ -38,7 +38,7 @@ describe(pkg.name + '/index.js test service', function() {
       .send([{ idIstex: '1234567890123456789012345678901234567890', corpusName: 'elsevier' }])
       .end(function(err, res) {
         expect(err).to.be.null;
-        expect(res.body['1234567890123456789012345678901234567890']).to.match(/^ark:\/67375\/6H6-[A-Z0-9]{8}-[A-Z0-9]$/);
+        expect(res.body['1234567890123456789012345678901234567890']).to.match(/^ark:\/[0-9]{5}\/6H6-[A-Z0-9]{8}-[A-Z0-9]$/);
         done();
       });
     });
