@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node index.js",
     "debug": "nodemon -V index.js",
+    "test": "mocha",
     "lint": "eslint --ext .js lib/",
     "insertversion": "sed -i \"s#\\(image: istex/istex-ark:\\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" docker-compose.yml",
     "preversion": "npm run lint",
@@ -24,7 +25,10 @@
     "redis": "^2.7.1"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "eslint": "^3.6.1",
-    "nodemon": "^1.11.0"
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
+    "superagent": "^3.5.2"
   }
 }
