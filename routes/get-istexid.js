@@ -18,6 +18,8 @@ module.exports = function (req, res, next) {
   debug('Requesting ARK mapped to this istexId: ' + istexId);
 
   redisClient.get(istexId, function (err, ark) {
+    if (err) return res.status(500).send(err);
+    
     var arkSplitted = inistArk.parse(ark);
     if (arkSplitted) {
       debug('ARK found: ' + istexId + ' -> ' + arkSplitted.ark);
