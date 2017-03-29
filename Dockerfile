@@ -22,7 +22,7 @@ RUN yarn install && yarn cache clean
 # and where is your data folder
 RUN echo '{ \
   "httpPort": 3000, \
-  "configPath": "/app/dump/istexid-ark.json", \
+  "configPath": "/app/dump/istexcorpus-arksubpublisher.json", \
   "dataPath": "" \
 }' > /etc/ezmaster.json
 EXPOSE 3000
