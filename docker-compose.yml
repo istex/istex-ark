@@ -4,7 +4,7 @@ services:
 
   istex-ark-ws:
     container_name: istex-ark-ws
-    image: istex/istex-ark:2.1.2
+    image: istex/istex-ark:2.1.3
     links:
       - istex-ark-redis
     ports:
