@@ -8,7 +8,9 @@ var path = require('path')
   , redisClient = require('redis').createClient({'host': 'istex-ark-redis'})
   , InistArk = require('inist-ark');
 
-var inistArk = new InistArk({ naan: '67375' });
+var inistArk = new InistArk(
+  { naan: process.env.NODE_ENV === 'production' ? '67375' : '12345' }
+);
 
 module.exports = function (req, res, next) {
   var istexId = req.originalUrl.slice(1);

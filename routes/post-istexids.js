@@ -27,8 +27,9 @@ module.exports.routing = function (app) {
     if (!req.body || Object.keys(req.body).length <= 0) {
       res.status(400).send('Sorry, you must give an array of {corpusName:..., idIstex:...} in the body of your POST request !')
     } else {
-      const ark = new InistArk();
-
+      const ark = new InistArk(
+        { naan: process.env.NODE_ENV === 'production' ? '67375' : '12345' }
+      );
       const arks = {}
       const docObjects = req.body;
 
@@ -46,7 +47,7 @@ module.exports.routing = function (app) {
         // check that the istexid is syntaxycaly ok
         if (!/^[A-Z0-9]{40}$/.test(idIstex)) {
           debug('Ignoring item because istexid syntax is wrong ^[A-Z0-9]{40}$', docObject);
-          return next();
+          return next(new Error('idIstex should match ^[A-Z0-9]{40}$'));
         }
 
         async.waterfall([
@@ -94,7 +95,7 @@ module.exports.routing = function (app) {
         });
       }, function (err) {
         if (err) {
-          res.status(400).send(err);
+          return res.status(400).send(err);
         }
         res.status(201).send(arks);
       });

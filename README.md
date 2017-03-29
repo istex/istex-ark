@@ -95,6 +95,9 @@ You can test it on these urls:
 - http://127.0.0.1:3000/ark:/12345/ABC-123456
 - http://127.0.0.1:3000/ark:/12345/XYZ-234567
 
+> **Note**: when `NODE_ENV` environment variable is set to `production`, the
+> used NAAN is 67375 (Inist's NAAN), otherwise it is 12345.
+
 # Managing data
 
 ISTEX's subpublishers can be manualy updated in this file:

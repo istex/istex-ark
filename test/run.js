@@ -30,7 +30,7 @@ describe(pkg.name + '/index.js test service', function() {
         expect(err.status).to.equal(400);
         done();
       });
-    })
+    });
 
     it('returns an ARK for one idIstex', function(done) {
       request
@@ -38,10 +38,10 @@ describe(pkg.name + '/index.js test service', function() {
       .send([{ idIstex: '1234567890123456789012345678901234567890', corpusName: 'elsevier' }])
       .end(function(err, res) {
         expect(err).to.be.null;
-        expect(res.body['1234567890123456789012345678901234567890']).to.match(/^ark:\/67375\/6H6-[A-Z0-9]{8}-[A-Z0-9]/);
+        expect(res.body['1234567890123456789012345678901234567890']).to.match(/^ark:\/[0-9]{5}\/6H6-[A-Z0-9]{8}-[A-Z0-9]$/);
         done();
       });
-    })
+    });
 
     it('returns an ARK for two idIstex', function(done) {
       request
@@ -55,7 +55,27 @@ describe(pkg.name + '/index.js test service', function() {
         expect(res.body['1234567890123456789012345678901234567890'].length).to.equal(25);
         done();
       });
-    })
+    });
+
+    it('checks if corpusName exists', function(done) {
+      request
+      .post('http://127.0.0.1:3000/')
+      .send([{ idIstex: '1234567890123456789012345678901234567890', corpusName: 'anything' }])
+      .end(function(err, res) {
+        expect(err).to.be.not.null;
+        done();
+      });
+    });
+
+    it('checks the syntax of idIstex', function(done) {
+      request
+      .post('http://127.0.0.1:3000/')
+      .send([{ idIstex: '1234567890', corpusName: 'elsevier'}])
+      .end(function(err, res) {
+        expect(err).to.be.not.null;
+        done();
+      });
+    });
 
   });
 
