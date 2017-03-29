@@ -88,14 +88,10 @@ module.exports.routing = function (app) {
               cbs2)
             })
           }
-          ], function (err) {
-            debug('waterfall end', arks);
-            next(err)
-          });
-        // }
-        // else {
-        //   next(new Error('Missing corpusName'));
-        // }
+        ], function (err) {
+          debug('waterfall end', arks);
+          next(err)
+        });
       }, function (err) {
         if (err) {
           res.status(400).send(err);
