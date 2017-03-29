@@ -3,9 +3,7 @@
 [![Docker stars](https://img.shields.io/docker/stars/istex/istex-ark.svg)](https://registry.hub.docker.com/u/istex/istex-ark/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/istex/istex-ark.svg)](https://registry.hub.docker.com/u/istex/istex-ark/)
 
-Mapping ARK identifiers to ISTEX internal identifiers (istexid).
-
-This webservice is temporary cause ARK identifiers will be integrated nativly in the ISTEX API in the future. It is usefull to make a proof of concept about how to associate ARK identifiers to ISTEX identifiers. 
+Mapping ARK identifiers to ISTEX internal identifiers (istexid). This web service is used internally in the LoadISTEX workflow.
 
 ## Examples
 
@@ -47,6 +45,40 @@ returns
 }
 ```
 
+To get all the ARK and ISTEXID stored in the database:
+
+```
+GET https://ark.istex.fr/dump
+```
+
+returns
+
+```javascript
+[
+  {
+    "istexId":"128CB89965DA8E531EC59C61102B0678DDEE6BB7",
+    "ark":"ark:/12345/ABC-123456"
+  },
+  {
+    "istexId":"D05B81D27DEB061B4F7B26DD039414D528C85635",
+    "ark":"ark:/123456/6H6-H6LSG993-3"
+  }
+]
+```
+
+To generate a new unique ARK to an ISTEXID:
+
+```
+echo '[{"corpusName":"elsevier", "idIstex":"D05B81D27DEB061B4F7B26DD039414D528C85635"}]' | \
+  curl --proxy "" -X POST -H "Content-Type: application/json" \
+  http://127.0.0.1:3000/ --data @-
+```
+
+returns
+
+```
+{"D05B81D27DEB061B4F7B26DD039414D528C85635":"ark:/123456/6H6-H6LSG993-3"}
+```
 
 ## Development
 
@@ -65,22 +97,11 @@ You can test it on these urls:
 
 # Managing data
 
-To create a new ``dump/istexid-ark.json`` dump:
+ISTEX's subpublishers can be manualy updated in this file:
+https://github.com/istex/istex-ark/blob/master/dump/istexcorpus-arksubpublisher.json
 
-```
-echo "{}" > dump/istexid-ark.json
-node tools/generate-istexid-ark.js > dump/istexid-ark-tmp.json
-mv dump/istexid-ark-tmp.json dump/istexid-ark.json
-```
+Redis is used to store ISTEXID and ARKS, these data are very important and are saved on the filesystem on this folder: ``redis-data/``
+This folder contains two files:
 
-
-To update the ``dump/istexid-ark.json`` dump:
-
-```
-node tools/generate-istexid-ark.js > dump/istexid-ark-tmp.json
-mv dump/istexid-ark-tmp.json dump/istexid-ark.json
-```
-
-To add a new istex document into inist-ark:
-  - Add the istexId of the wanted document in dump/istexid.json
-  - Update ``dump/istexid-ark.json`` (see above)
+- appendonly.aof : is the logs of all the updates done on the database
+- dump.rdb : is a full binary snapshot of the database

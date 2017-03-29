@@ -2,8 +2,17 @@ version: '2'
 
 services:
 
-  istex-ark:
-    container_name: istex-ark
-    image: istex/istex-ark:1.2.0
+  istex-ark-ws:
+    container_name: istex-ark-ws
+    image: istex/istex-ark:2.1.1
+    links:
+      - istex-ark-redis
     ports:
       - 45446:3000
+
+  istex-ark-redis:
+    container_name: istex-ark-redis
+    image: redis:3.2.8
+    volumes:
+      - ./redis-data:/data
+    command: redis-server --appendonly yes # cf http://download.redis.io/redis-stable/redis.conf

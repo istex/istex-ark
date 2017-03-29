@@ -36,55 +36,66 @@ module.exports.routing = function (app) {
         const corpusName = docObject.corpusName;
         const idIstex = docObject.idIstex;
         const subpublisher = subpublishers[corpusName];
+
         // check that the subpublisher exists in the list
-        if (subpublisher) {
-          async.waterfall([
-            // check that the idIstex has not yet an ARK
-            function checkIdIstex(cbs1) {
-              redisClient.get(idIstex, function(err, existingArk) {
-                if (err) { return cbs1(err); }
-                debug('existingArk', existingArk);
-                arks[idIstex] = existingArk;
-                return cbs1(null, existingArk);
-              })
+        if (!subpublisher) {
+          debug('Misssing subpublisher', docObject);
+          return next(new Error('Missing corpusName'));
+        }
+
+        // check that the istexid is syntaxycaly ok
+        if (!/^[A-Z0-9]{40}$/.test(idIstex)) {
+          debug('Ignoring item because istexid syntax is wrong ^[A-Z0-9]{40}$', docObject);
+          return next();
+        }
+
+        async.waterfall([
+          // check that the idIstex has not yet an ARK
+          function checkIdIstex(cbs1) {
+            redisClient.get(idIstex, function(err, existingArk) {
+              if (err) { return cbs1(err); }
+              debug('existingArk', existingArk);
+              arks[idIstex] = existingArk;
+              return cbs1(null, existingArk);
+            })
+          },
+          function checkArk(theArk, cbs2) {
+            debug('theArk', theArk);
+            if (theArk) { return cbs2(); }
+            // check that the ARK does not yet exist
+            async.during(function testArkUnicity(cb1) {
+              if (theArk === null) {
+                return cb1(null, true);
+              }
+              redisClient.exists(theArk, cb1);
             },
-            function checkArk(theArk, cbs2) {
-              debug('theArk', theArk);
-              if (theArk) { return cbs2(); }
-              // check that the ARK does not yet exist
-              async.during(function testArkUnicity(cb1) {
-                if (theArk === null) {
-                  return cb1(null, true);
+            function generateNewArk(cb2) {
+              theArk = ark.generate({subpublisher: subpublisher});
+              debug('newArk', theArk, 'idIstex', idIstex);
+              return cb2(null)
+            },
+            function cb(err) {
+              if (err) { return cbs2(err); }
+              arks[idIstex] = theArk;
+              async.parallel([
+                function setArk (cbp1) {
+                  redisClient.set(theArk, idIstex, cbp1);
+                },
+                function setIdIstex(cbp2) {
+                  redisClient.set(idIstex, theArk, cbp2);
                 }
-                redisClient.exists(theArk, cb1);
-              },
-              function generateNewArk(cb2) {
-                theArk = ark.generate({subpublisher: subpublisher});
-                debug('newArk', theArk, 'idIstex', idIstex);
-                return cb2(null)
-              },
-              function cb(err) {
-                if (err) { return cbs2(err); }
-                arks[idIstex] = theArk;
-                async.parallel([
-                  function setArk (cbp1) {
-                    redisClient.set(theArk, idIstex, cbp1);
-                  },
-                  function setIdIstex(cbp2) {
-                    redisClient.set(idIstex, theArk, cbp2);
-                  }
-                ],
-                cbs2)
-              })
-            }
+              ],
+              cbs2)
+            })
+          }
           ], function (err) {
             debug('waterfall end', arks);
             next(err)
           });
-        }
-        else {
-          next(new Error('Missing corpusName'));
-        }
+        // }
+        // else {
+        //   next(new Error('Missing corpusName'));
+        // }
       }, function (err) {
         if (err) {
           res.status(400).send(err);
