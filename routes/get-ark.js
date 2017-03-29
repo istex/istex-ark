@@ -20,11 +20,12 @@ module.exports = function (req, res, next) {
     });
   }
 
-  debug('Requesting istexId mapped to this ARK: ' + arkSplitted);
-  
+  debug('Requesting istexId mapped to this ARK: ' + arkSplitted.ark);
+
   redisClient.get(arkSplitted.ark, function (err, istexId) {
+    if (err) return res.status(500).send(err);
     if (istexId) {
-      debug('istexId found: ' + arkSplitted.ark + ' -> ' + istexId);
+      debug('Found in Redis: ' + arkSplitted.ark + ' -> ' + istexId);
       return res.status(200).send({
         "ark": arkSplitted,
         "istexId": istexId
