@@ -75,14 +75,13 @@ A terme les identifiants ARK pourront être chargés directement dans la platefo
 
     <script>
       $.ajax({
-        url: "/index.json",
+        url: "/dump",
       }).done(function (data) {
-        Object.keys(data).forEach(function (key) {
-          if (key.indexOf('ark') !== -1) return;
+        data.forEach(function (item) {
           $('#istexid-ark-table').append(
             '<tr>' +
-              '<td><a href="/' + key + '"><code>' + key + '</code></a></td>' +
-              '<td><a href="/' + data[key]+ '"><code>' + data[key]+ '</code></a></td>' +
+              '<td><a href="/' + item['istexId'] + '"><code>' + item['istexId'] + '</code></a></td>' +
+              '<td><a href="/' + item['ark'] + '"><code>' + item['ark'] + '</code></a></td>' +
             '</tr>'
           );          
         });

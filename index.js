@@ -28,6 +28,9 @@ app.use('/[A-Z0-9]{40}', require('./routes/get-istexid.js'));
 // post routes management
 require('./routes/post-istexids.js').routing(app);
 
+// GET /dump
+// few arks and istex ID from the database
+require('./routes/get-arks-istexids.js').routing(app);
 
 app.listen(3000, function () {
   console.info(kuler(pkg.name + ' ' + pkg.version + ' is listening', 'olive'));
