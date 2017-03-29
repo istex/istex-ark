@@ -11,8 +11,8 @@ services:
     tty: true
     stdin_open: true  # to be able to use CTRL+C to stop the debug
     environment:
-      - NODE_ENV: "development"
-      - DEBUG: ${DEBUG}
+      NODE_ENV: "development"
+      DEBUG: ${DEBUG}
     ports:
       - 45446:3000
       - 3000:3000
