@@ -46,7 +46,7 @@ module.exports.routing = function (app) {
         // check that the istexid is syntaxycaly ok
         if (!/^[A-Z0-9]{40}$/.test(idIstex)) {
           debug('Ignoring item because istexid syntax is wrong ^[A-Z0-9]{40}$', docObject);
-          return next();
+          return next(new Error('idIstex should match ^[A-Z0-9]{40}$'));
         }
 
         async.waterfall([
