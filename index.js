@@ -30,7 +30,7 @@ require('./routes/post-istexids.js').routing(app);
 
 // GET /dump
 // few arks and istex ID from the database
-require('./routes/get-arks-istexids.js').routing(app);
+require('./routes/get-dump.js').routing(app);
 
 app.listen(3000, function () {
   console.info(kuler(pkg.name + ' ' + pkg.version + ' is listening', 'olive'));
