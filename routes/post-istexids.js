@@ -94,7 +94,7 @@ module.exports.routing = function (app) {
         });
       }, function (err) {
         if (err) {
-          res.status(400).send(err);
+          return res.status(400).send(err);
         }
         res.status(201).send(arks);
       });
