@@ -57,6 +57,16 @@ describe(pkg.name + '/index.js test service', function() {
       });
     });
 
+    it('checks if corpusName exists', function(done) {
+      request
+      .post('http://127.0.0.1:3000/')
+      .send([{ idIstex: '1234567890123456789012345678901234567890', corpusName: 'anything' }])
+      .end(function(err, res) {
+        expect(err).to.be.not.null;
+        done();
+      });
+    });
+
     it('checks the syntax of idIstex', function(done) {
       request
       .post('http://127.0.0.1:3000/')
