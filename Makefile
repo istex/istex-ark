@@ -32,6 +32,9 @@ run-debug: ## run istex-ark in debug mode (live regenerate the bundle.js if js a
 	@# attach to the istex-ark container in order to be able to stop it easily with CTRL+C
 	@docker attach istex-ark-ws
 
+redis-cli: ## run redis client on the istex-ark-redis server
+	@docker exec -it istex-ark-redis redis-cli
+
 # makefile rule used to keep current user's unix rights on the docker mounted files
 chown:
 	@test ! -d $$(pwd)/node_modules || docker run -it --rm --net=host -v $$(pwd):/app node:6.9.1 chown -R $$(id -u):$$(id -g) /app/
