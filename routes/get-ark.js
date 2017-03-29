@@ -5,7 +5,6 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('istex-ark:' + basename)
-  , mapping = require('../dump/istexid-ark.json')
   , InistArk = require('inist-ark');
 
 var ark = new InistArk({ naan: '12345' });
@@ -21,7 +20,9 @@ module.exports = function (req, res, next) {
   }
 
   debug('Requesting istexId mapped to this ARK: ' + arkSplitted);
-  var istexId = mapping[arkSplitted.ark];
+  
+  // TODO: change this with a REDIS request
+  var istexId = 'D05B81D27DEB061B4F7B26DD039414D528C85635';
   if (istexId) {
     debug('istexId found: ' + arkSplitted.ark + ' -> ' + istexId);
     return res.status(200).send({
