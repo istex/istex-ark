@@ -25,7 +25,7 @@ build: ## build the docker istex/istex-ark image locally
 
 run-prod: ## run istex-ark in production mode
 	@docker-compose -f ./docker-compose.yml up -d
-	@docker attach istex-ark
+	@docker attach istex-ark-ws
 
 run-debug: ## run istex-ark in debug mode (live regenerate the bundle.js if js are modified on fs)
 	@docker-compose -f ./docker-compose.debug.yml up -d
