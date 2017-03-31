@@ -8,8 +8,8 @@ services:
     links:
       - istex-ark-redis
     environment:
-      NODE_ENV
-      DEBUG
+      - NODE_ENV
+      - DEBUG
     ports:
       - 45446:3000
 
