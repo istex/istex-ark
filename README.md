@@ -102,6 +102,7 @@ Deployment example on vd-istex-li.intra.inist.fr
 ssh istex@vd-istex-li.intra.inist.fr
 mkdir istex-ark/ && cd istex-ark/
 wget https://raw.githubusercontent.com/istex/istex-ark/master/docker-compose.yml
+wget https://raw.githubusercontent.com/istex/istex-ark/master/redis.conf
 NODE_ENV=developement docker-compose up -d
 
 # create a first ARK for example
@@ -121,5 +122,5 @@ https://github.com/istex/istex-ark/blob/master/dump/istexcorpus-arksubpublisher.
 Redis is used to store ISTEXID and ARKS, these data are very important and are saved on the filesystem on this folder: ``redis-data/``
 This folder contains two files:
 
-- appendonly.aof : is the logs of all the updates done on the database
-- dump.rdb : is a full binary snapshot of the database
+- appendonly_istex_ark.aof : is the logs of all the updates done on the database
+- dump_istex-ark.rdb : is a full binary snapshot of the database
