@@ -106,7 +106,8 @@ wget https://raw.githubusercontent.com/istex/istex-ark/master/redis.conf
 NODE_ENV=developement docker-compose up -d
 
 # create a first ARK for example
-echo '[{"corpusName":"elsevier", "idIstex":"128CB89965DA8E531EC59C61102B0678DDEE6BB7"}]' | curl --proxy "" -v -X POST -H "Content-Type: application/json" http://vd-istex-li.intra.inist.fr:45446/ --data @-
+echo '[{"corpusName":"elsevier", "idIstex":"128CB89965DA8E531EC59C61102B0678DDEE6BB7"}]' |\
+  curl --proxy "" -v -X POST -H "Content-Type: application/json" http://vd-istex-li.intra.inist.fr:45446/ --data @-
 ```
 
 istex-ark is then available at http://vd-istex-li.intra.inist.fr:45446/
