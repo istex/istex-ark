@@ -1,7 +1,7 @@
 {
   "name": "istex-ark",
   "version": "2.2.2",
-  "description": "ARK identifiers for ISTEX documents (POC)",
+  "description": "ARK identifiers for ISTEX documents",
   "private": true,
   "main": "index.js",
   "scripts": {
