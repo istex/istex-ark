@@ -1,4 +1,4 @@
-FROM node:6.9.1
+FROM node:6.17.1
 
 # to help docker debugging
 ENV DEBIAN_FRONTEND noninteractive
