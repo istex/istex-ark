@@ -23,5 +23,12 @@
   "brepols-ebooks": "8QZ",
   "gsl": "996",
   "lavoisier": "HT0",
-  "edp-sciences": "80W"
+  "edp-sciences": "80W",
+  "duke" : "765",
+  "acs" : "TPS",
+  "openedition-ebooks" : "9TJ",
+  "openedition-revues" : "G14",
+  "droz" : "X4C",
+  "rsl" : "V84",
+  "taylor-francis" : "T1V"
 }
