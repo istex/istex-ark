@@ -20,7 +20,7 @@ module.exports = function (req, res, next) {
   redisClient.get(istexId, function (err, ark) {
     if (err) return res.status(500).send(err);
     
-    var arkSplitted = inistArk.parse(ark);
+    var arkSplitted = (ark) ? inistArk.parse(ark) : null;
     if (arkSplitted) {
       debug('ARK found: ' + istexId + ' -> ' + arkSplitted.ark);
       return res.status(200).send({
