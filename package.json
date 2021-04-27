@@ -22,7 +22,7 @@
     "express": "^4.14.0",
     "inist-ark": "^2.0.0",
     "kuler": "0.0.0",
-    "redis": "^2.7.1"
+    "redis": "^3.1.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
