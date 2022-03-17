@@ -25,12 +25,12 @@ module.exports.routing = function (app) {
   // Body of POST request [{corpusName:... , idIstex:... }, ....]
   app.post('/',function (req, res) {
     if (!req.body || Object.keys(req.body).length <= 0) {
-      res.status(400).send('Sorry, you must give an array of {corpusName:..., idIstex:...} in the body of your POST request !')
+      res.status(400).send('Sorry, you must give an array of {corpusName:..., idIstex:...} in the body of your POST request !');
     } else {
       const ark = new InistArk(
         { naan: process.env.NODE_ENV === 'production' ? '67375' : '12345' }
       );
-      const arks = {}
+      const arks = {};
       const docObjects = req.body;
 
       async.eachSeries(docObjects, function(docObject, next) {
@@ -58,7 +58,7 @@ module.exports.routing = function (app) {
               debug('existingArk', existingArk);
               arks[idIstex] = existingArk;
               return cbs1(null, existingArk);
-            })
+            });
           },
           function checkArk(theArk, cbs2) {
             debug('theArk', theArk);
@@ -73,7 +73,7 @@ module.exports.routing = function (app) {
             function generateNewArk(cb2) {
               theArk = ark.generate({subpublisher: subpublisher});
               debug('newArk', theArk, 'idIstex', idIstex);
-              return cb2(null)
+              return cb2(null);
             },
             function cb(err) {
               if (err) { return cbs2(err); }
@@ -86,12 +86,12 @@ module.exports.routing = function (app) {
                   redisClient.set(idIstex, theArk, cbp2);
                 }
               ],
-              cbs2)
-            })
+              cbs2);
+            });
           }
         ], function (err) {
           debug('waterfall end', arks);
-          next(err)
+          next(err);
         });
       }, function (err) {
         if (err) {

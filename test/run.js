@@ -18,7 +18,7 @@ describe(pkg.name + '/index.js test service', function() {
         expect(err.status).to.be.not.null;
         expect(err.status).to.equal(400);
         done();
-      })
+      });
     });
 
     it('checks presence of corpusName', function(done) {
