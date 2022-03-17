@@ -4,7 +4,7 @@ services:
 
   istex-ark-ws:
     container_name: istex-ark-ws
-    image: node:6.17.1
+    build: .
     working_dir: /app
     volumes:
       - .:/app

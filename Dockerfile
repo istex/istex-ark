@@ -1,4 +1,4 @@
-FROM node:6.17.1
+FROM node:14-slim
 
 # to help docker debugging
 ENV DEBIAN_FRONTEND noninteractive
@@ -6,14 +6,15 @@ ENV DEBIAN_FRONTEND noninteractive
 # install yarn (faster than npm...)
 RUN npm config set strict-ssl false
 RUN apt-get update && apt-get install -y apt-transport-https
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN apt-get update && apt-get install -y yarn
+# RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+# RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+# RUN apt-get update && apt-get install -y yarn
 
 # install nodejs dependencies
 WORKDIR /app
 COPY ./package.json /app/package.json
-RUN yarn install && yarn cache clean
+COPY ./package-lock.json /app/package-lock.json
+RUN npm ci --only=production
 
 # ezmasterization of istex-ark:
 # creates the /etc/ezmaster.json in the docker image.
