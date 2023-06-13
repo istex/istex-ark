@@ -1,6 +1,6 @@
 {
   "name": "istex-ark",
-  "version": "2.10.1",
+  "version": "2.10.2",
   "description": "ARK identifiers for ISTEX documents",
   "private": true,
   "main": "index.js",
