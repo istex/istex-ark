@@ -5,7 +5,7 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('istex-ark:' + basename)
-  , redisClient = require('redis').createClient({'host': 'istex-ark-redis'})
+  , redisClient = require('redis').createClient({'host': process.env.REDIS_SERVERNAME || 'istex-ark-redis'})
   , InistArk = require('inist-ark');
 
 var inistArk = new InistArk(

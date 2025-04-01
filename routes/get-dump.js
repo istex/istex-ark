@@ -8,7 +8,7 @@ var path = require('path')
   , debug = require('debug')('istex-ark:' + basename)
   , InistArk = require('inist-ark')
   , async = require('async')
-  , redisClient = require('redis').createClient({'host': 'istex-ark-redis'})
+  , redisClient = require('redis').createClient({'host': process.env.REDIS_SERVERNAME || 'istex-ark-redis'})
   ;
 
 module.exports.routing = function (app) {
